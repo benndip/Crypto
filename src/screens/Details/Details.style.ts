@@ -30,7 +30,6 @@ const styles = StyleSheet.create({
   },
   chartView: {
     backgroundColor: "#Fff",
-    height: DEVICE_HEIGHT * 0.27,
     borderRadius: 10,
     padding: 7,
     marginVertical: 8,
