@@ -11,6 +11,26 @@ import { DEVICE_HEIGHT } from "@utils/sizes";
 import React, { useState } from "react";
 import { ScrollView, Text, TouchableOpacity, View } from "react-native";
 import styles from "./Details.style";
+import { LineChart } from "react-native-wagmi-charts";
+
+const data = [
+  {
+    timestamp: 1625945400000,
+    value: 33575.25,
+  },
+  {
+    timestamp: 1625946300000,
+    value: 33545.25,
+  },
+  {
+    timestamp: 1625947200000,
+    value: 33510.25,
+  },
+  {
+    timestamp: 1625948100000,
+    value: 33215.25,
+  },
+];
 
 const customHeader = (navigation: any) => {
   return {
@@ -122,9 +142,16 @@ const Details = ({ navigation }: any) => {
             </TouchableOpacity>
           ))}
         </View>
-        <View style={styles.chartView}>
-          <Text>CHart</Text>
-        </View>
+        {/* <View style={styles.chartView}> */}
+          <LineChart.Provider data={data}>
+            <LineChart>
+              <LineChart.Path />
+              <LineChart.CursorCrosshair />
+            </LineChart>
+            <LineChart.PriceText />
+            <LineChart.DatetimeText />
+          </LineChart.Provider>
+        {/* </View> */}
         <View style={[styles.flexRow, styles.coinStatusesView]}>
           <LabelValueCard data={coinStatuses.openClose} width="48%" />
           <LabelValueCard data={coinStatuses.highLow} width="48%" />

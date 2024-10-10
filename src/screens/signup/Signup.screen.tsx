@@ -1,13 +1,26 @@
-import React, { useState } from "react";
-import { Text, TouchableOpacity, View } from "react-native";
-import { CustomButton, CustomInput } from "../../components";
 import { Email, Eye, EyeOff, Lock } from "@assets/icons/icons";
-import styles from "../Login/Login.styles";
-import AuthLayout from "src/layouts/auth-layout/AuthLayout";
-import { PRIMARY_GRAY_COLOR } from "@utils/colors";
+import {
+  PRIMARY_BLUE_COLOR,
+  PRIMARY_DARK_BLUE_COLOR,
+  PRIMARY_GRAY_COLOR,
+  SECONDARY_BLUE_COLOR,
+} from "@utils/colors";
+import { StatusBar } from "expo-status-bar";
+import React, { useState } from "react";
+import {
+  Image,
+  ImageBackground,
+  ScrollView,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import { paths } from "src/constants/paths";
+import { CustomButton, CustomInput } from "../../components";
+import styles from "../Login/Login.styles";
+import { DEVICE_HEIGHT } from "@utils/sizes";
 
-const Signup = ({ navigation }: any) => {
+const Login = ({ navigation }: any) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [secureTextEntry, setSecureTextEntry] = useState(false);
@@ -15,113 +28,121 @@ const Signup = ({ navigation }: any) => {
   const handleLogin = () => {};
 
   return (
-    <AuthLayout
-      title="Welcome Back!"
-      caption={`Welcome back! We're thrilled to have you here again. Let's pick up where we left off.`}
+    <ImageBackground
+      style={{
+        flex: 1,
+        backgroundColor: PRIMARY_DARK_BLUE_COLOR,
+        justifyContent: "center",
+        paddingHorizontal: 10,
+      }}
+      source={require("../../../assets/images/auth_bg.png")}
     >
-      <View style={{ gap: 3, marginTop: 10, marginBottom: 4 }}>
-        <CustomInput
-          placeholder="Email"
-          onChangeText={(text: string) => setEmail(text)}
-          value={email}
-          keyboardType="email-address"
-          leftIcon={() => (
-            <Email color={email?.length > 0 ? "#fff" : PRIMARY_GRAY_COLOR} />
-          )}
-        />
-        <CustomInput
-          placeholder="Password"
-          value={password}
-          onChangeText={(text: string) => setPassword(text)}
-          leftIcon={() => (
-            <Lock color={password?.length > 0 ? "#fff" : PRIMARY_GRAY_COLOR} />
-          )}
-          secureTextEntry={secureTextEntry}
-          rightIcon={() => (
-            <TouchableOpacity
-              style={styles.eyeIcon}
-              onPress={() => setSecureTextEntry(!secureTextEntry)}
-            >
-              {secureTextEntry ? (
-                <Eye
-                  color={password?.length > 0 ? "#fff" : PRIMARY_GRAY_COLOR}
+      <StatusBar translucent style="light" />
+      <ScrollView
+        contentContainerStyle={{
+          paddingTop: DEVICE_HEIGHT * 0.2,
+          paddingBottom: DEVICE_HEIGHT * 0.05,
+        }}
+        showsVerticalScrollIndicator={false}
+      >
+        <View style={{ padding: 20 }}>
+          <Text style={styles.heading}>Signup</Text>
+          <Text style={styles.caption}>
+          Create an account to unlock exclusive features and get started!
+          </Text>
+          <View style={{ gap: 16, marginBottom: 2, marginTop: 30 }}>
+            <CustomInput
+              placeholder="Email"
+              onChangeText={(text: string) => setEmail(text)}
+              value={email}
+              keyboardType="email-address"
+              leftIcon={() => (
+                <Email
+                  color={email?.length > 0 ? "#fff" : PRIMARY_GRAY_COLOR}
                 />
-              ) : (
-                <EyeOff
+              )}
+            />
+            <CustomInput
+              placeholder="Password"
+              value={password}
+              onChangeText={(text: string) => setPassword(text)}
+              leftIcon={() => (
+                <Lock
                   color={password?.length > 0 ? "#fff" : PRIMARY_GRAY_COLOR}
                 />
               )}
-            </TouchableOpacity>
-          )}
-        />
-      </View>
-      <TouchableOpacity style={{ alignSelf: "flex-end" }} onPress={() => null}>
-        <Text
-          style={[
-            styles.accountText,
-            {
-              color: "#fff",
-            },
-          ]}
-        >
-          Forgot Password?
-        </Text>
-      </TouchableOpacity>
-      <CustomButton
-        title="Sign In"
-        onPress={handleLogin}
-        style={{
-          marginTop: 12,
-        }}
-      />
-      <View style={[styles.flexRow, { alignSelf: "center", marginTop: 2 }]}>
-        <Text
-          style={[
-            styles.accountText,
-            { marginRight: 10, color: PRIMARY_GRAY_COLOR },
-          ]}
-        >
-          Don’t have an account yet?
-        </Text>
-        <TouchableOpacity onPress={() => navigation.navigate(paths.SIGNUP)}>
-          <Text style={[styles.accountText]}>Signup</Text>
-        </TouchableOpacity>
-      </View>
-      <View style={styles.bottomSection}>
-        <View
-          style={{
-            position: "relative",
-            marginTop: 10,
-            marginBottom: 5,
-          }}
-        >
-          <Text style={styles.continueText}>OR CONTINUE WITH</Text>
-          <View style={styles.hairline} />
-        </View>
-        <View style={{ gap: 10 }}>
-          <CustomButton
-            title={`Sign in with Google`}
-            style={{
-              borderWidth: 1,
-              borderColor: "#fff",
-            }}
-            onPress={handleLogin}
-          />
-          {/* <CustomButton
-            text='Sign in with Google'
-            rightIcon={() => <GoogleIcon />}
+              secureTextEntry={secureTextEntry}
+              rightIcon={() => (
+                <TouchableOpacity
+                  style={styles.eyeIcon}
+                  onPress={() => setSecureTextEntry(!secureTextEntry)}
+                >
+                  {secureTextEntry ? (
+                    <Eye
+                      color={password?.length > 0 ? "#fff" : PRIMARY_GRAY_COLOR}
+                    />
+                  ) : (
+                    <EyeOff
+                      color={password?.length > 0 ? "#fff" : PRIMARY_GRAY_COLOR}
+                    />
+                  )}
+                </TouchableOpacity>
+              )}
+            />
+          </View>
+          <TouchableOpacity
+            style={{ alignSelf: "flex-end", marginTop: 5 }}
             onPress={() => null}
-            bgColor='transparent'
+          >
+            <Text
+              style={[
+                styles.accountText,
+                {
+                  color: PRIMARY_BLUE_COLOR,
+                },
+              ]}
+            >
+              Forgot Password?
+            </Text>
+          </TouchableOpacity>
+          <CustomButton
+            title="Sign up"
+            onPress={handleLogin}
             style={{
-              borderWidth: 1,
-              borderColor: '#fff',
+              marginTop: DEVICE_HEIGHT * 0.05,
             }}
-            color={'#fff'}
-          /> */}
+          />
+          <View
+            style={[styles.flexRow, { alignSelf: "center", marginTop: 16 }]}
+          >
+            <Text
+              style={[
+                styles.accountText,
+                { marginRight: 5, color: PRIMARY_GRAY_COLOR },
+              ]}
+            >
+              Have an account?
+            </Text>
+            <TouchableOpacity onPress={() => navigation.navigate(paths.LOGIN)}>
+              <Text style={[styles.accountText]}>Login</Text>
+            </TouchableOpacity>
+          </View>
         </View>
-      </View>
-    </AuthLayout>
+        <View style={styles.bottomSection}>
+          <TouchableOpacity style={styles.googleButton}>
+            <Image
+              source={require("../../../assets/images/google.png")}
+              resizeMode="contain"
+              style={{
+                width: "100%",
+                height: "100%",
+              }}
+            />
+          </TouchableOpacity>
+        </View>
+      </ScrollView>
+    </ImageBackground>
   );
 };
 
-export default Signup;
+export default Login;

@@ -9,7 +9,7 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 
 const MainNavigator = () => {
   return (
-    <Stack.Navigator screenOptions={{ headerShown: false }}>
+    <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName='BottomTabNavigator'>
         <Stack.Screen name="AuthStackNavigator" component={AuthStackNavigator} />
         <Stack.Screen name="BottomTabNavigator" component={BottomNavigator} />
     </Stack.Navigator>

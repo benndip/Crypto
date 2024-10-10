@@ -1,4 +1,8 @@
-import { PRIMARY_BLUE_COLOR, PRIMARY_DARK_BLUE_COLOR, PRIMARY_GRAY_COLOR } from "@utils/colors";
+import {
+  PRIMARY_BLUE_COLOR,
+  PRIMARY_DARK_BLUE_COLOR,
+  PRIMARY_GRAY_COLOR,
+} from "@utils/colors";
 import { DEVICE_WIDTH } from "@utils/sizes";
 import { StyleSheet } from "react-native";
 
@@ -14,14 +18,21 @@ const styles = StyleSheet.create({
   continueText: {
     textAlign: "center",
     color: "#fff",
-    fontSize: 13
+    fontSize: 13,
+  },
+  heading: {
+    fontSize: 32,
+    fontWeight: "bold",
+    color: PRIMARY_DARK_BLUE_COLOR,
+    marginBottom: 4
+  },
+  caption: {
+    color: PRIMARY_GRAY_COLOR,
   },
   hairline: {},
   eyeIcon: {},
   bottomSection: {
-    alignSelf: 'center',
-    gap: 10,
-    bottom: 17
+    alignSelf: "center",
   },
   googleButton: {
     width: DEVICE_WIDTH * 0.11,
@@ -30,7 +41,7 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     borderWidth: 0.7,
     borderColor: PRIMARY_GRAY_COLOR,
-    padding: 10
+    padding: 10,
   },
 });
 
