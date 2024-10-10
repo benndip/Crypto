@@ -1,11 +1,11 @@
 import { StyleSheet } from "react-native";
 import { DEVICE_HEIGHT, DEVICE_WIDTH, statusBarHeight } from "../../utils/sizes";
-import { PRIMARY_GREY_COLOR, PRIMARY_WHITE_COLOR } from "../../utils/colors";
+import { PRIMARY_DARK_BLUE_COLOR, PRIMARY_GREY_COLOR, PRIMARY_WHITE_COLOR } from "../../utils/colors";
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#0E0C20",
+    backgroundColor: PRIMARY_DARK_BLUE_COLOR,
     paddingTop: statusBarHeight + 25,
   },
   topIconAndText: {

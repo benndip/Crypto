@@ -1,28 +1,30 @@
-import { NavigatorScreenParams } from "@react-navigation/native"
+import { NavigatorScreenParams } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 export type RootStackParamList = {
-    Splash: undefined;
-    Login: undefined;
-    Signup: undefined;
-    BottomTabNavigator: NavigatorScreenParams<BottomTabParamList>
-    
-}
+  BottomTabNavigator: NavigatorScreenParams<BottomTabParamList>;
+  AuthStackNavigator: NavigatorScreenParams<AuthStackParamList>;
+};
 
 export type HomeStackParamList = {
-    Home: undefined;
-}
+  Home: undefined;
+  Details: undefined;
+};
 
 export type PortfolioStackParamList = {
-    Porfolio: undefined;
-}
+  Porfolio: undefined;
+};
 
 export type AccountStackParamList = {
-    Account: undefined;
-}
+  Account: undefined;
+};
+export type AuthStackParamList = {
+  Login: undefined;
+  Signup: undefined;
+};
 
 export type BottomTabParamList = {
-    HomeStackNavigator: NavigatorScreenParams<HomeStackParamList>;
-    PorfolioStackNavigator: NavigatorScreenParams<PortfolioStackParamList>;
-    AccountStackNavigator: NavigatorScreenParams<AccountStackParamList>;
-}
+  HomeStackNavigator: NavigatorScreenParams<HomeStackParamList>;
+  PorfolioStackNavigator: NavigatorScreenParams<PortfolioStackParamList>;
+  AccountStackNavigator: NavigatorScreenParams<AccountStackParamList>;
+};
