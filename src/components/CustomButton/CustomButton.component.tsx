@@ -16,7 +16,7 @@ const CustomButton = ({ title, textStyle, style, onPress }: IProps) => {
       style={[
         styles.container,
         {
-          height: DEVICE_HEIGHT * 0.06,
+          height: DEVICE_HEIGHT * 0.062,
           ...style,
         },
       ]}

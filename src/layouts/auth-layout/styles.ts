@@ -16,9 +16,7 @@ const styles = StyleSheet.create({
     padding: 26,
     height: DEVICE_HEIGHT * 0.8,
   },
-  bottomSection: {
-    marginTop: DEVICE_HEIGHT * 0.08,
-  },
+
   continueText: {
     position: "absolute",
     alignSelf: "center",
