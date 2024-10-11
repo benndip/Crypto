@@ -10,7 +10,7 @@ function Navigation() {
   return (
     <Stack.Navigator
       screenOptions={{ headerShown: false }}
-      initialRouteName={paths.BOTTOMTABNAVIGATOR}
+      initialRouteName={paths.SPLASH}
     >
       <Stack.Screen name={paths.SPLASH} component={Splash} />
       <Stack.Screen

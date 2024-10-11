@@ -1,3 +1,4 @@
+import { PRIMARY_GRAY_COLOR } from "@utils/colors";
 import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
@@ -7,19 +8,19 @@ const styles = StyleSheet.create({
     paddingVertical: 20,
   },
   item: {
-    padding: 10,
+    padding: 15,
     marginTop: 2,
-    backgroundColor: "#1e1e1e",
+    // backgroundColor: "#1e1e1e",
     borderWidth: 1,
     borderColor: "#444444",
     borderRadius: 5,
+    marginTop: 10
   },
   textInput: {
     padding: 12,
-    borderWidth: 1.5,
-    borderColor: "#444444",
+    borderWidth: 1,
+    borderColor: PRIMARY_GRAY_COLOR,
     borderRadius: 5,
-    backgroundColor: "#1e1e1e",
     color: "white",
   },
   ticker: {
@@ -35,11 +36,7 @@ const styles = StyleSheet.create({
     marginTop: 50,
   },
   buttonContainer: {
-    padding: 10,
-    alignItems: "center",
     marginVertical: 30,
-    marginHorizontal: 20,
-    borderRadius: 5,
   },
   buttonText: {
     fontSize: 17,

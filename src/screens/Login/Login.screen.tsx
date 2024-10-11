@@ -71,8 +71,8 @@ const Login = ({ navigation }: any) => {
           return Alert.alert(error.message, "Please check your email and password and try again");
         }
         dispatch(setUser(user));
-        AsyncStorage.setItem("session", JSON.stringify(user));
-        navigation.navigate("BottomTabNavigator");
+        AsyncStorage.setItem("user", JSON.stringify(user));
+        navigation.navigate(paths.BOTTOMTABNAVIGATOR);
       })
       .catch((error) => {
         return Alert.alert("Something Unexpected Happended!", error.message);

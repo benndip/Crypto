@@ -6,3 +6,5 @@ export const PRIMARY_BLUE_COLOR = '#5445FF';
 export const PRIMARY_DARK_BLUE_COLOR = '#0E0C20';
 export const SECONDARY_BLUE_COLOR = '#181D34';
 export const PRIMARY_GRAY_COLOR = '#697490';
+export const PRIMARY_DISABLED_COLOR = '#d3d3d3';
+export const SECONDARY_DISABLED_COLOR = '#808080';

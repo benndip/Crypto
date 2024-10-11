@@ -3,13 +3,14 @@ import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
   itemContainer: {
     flexDirection: "row",
-    padding: 15,
+    padding: 18,
+    paddingVertical: 20,
     //this background has to be the same of background app because swipeable-view-list
     backgroundColor: "#121212",
   },
   coinName: {
     color: "white",
-    fontSize: 16,
+    fontSize: 15,
     fontWeight: "bold",
   },
   coinCode: {

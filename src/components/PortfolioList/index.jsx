@@ -1,4 +1,4 @@
-import { View, Text, Pressable, SafeAreaView } from "react-native";
+import { View, Text, Pressable, SafeAreaView, Image } from "react-native";
 import React from "react";
 import { AntDesign } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
@@ -14,11 +14,14 @@ import {
   allPortfolioBoughtAssetsInStorage,
 } from "./../../atoms/PortfolioAssets";
 import { paths } from "src/constants/paths";
+import { PRIMARY_DARK_BLUE_COLOR, SECONDARY_BLUE_COLOR } from "@utils/colors";
+import { useAppSelector } from "src/redux/store";
+import CustomButton from "@components/CustomButton/CustomButton.component";
 
 export default function PortfolioList() {
   const navigation = useNavigation();
-  // const [assets, setAssets] = useRecoilState(allPortfolioAssets);
   const assets = useRecoilValue(allPortfolioAssets);
+  const { user } = useAppSelector((state) => state.auth);
   const [storageAssets, setStorageAssets] = useRecoilState(
     allPortfolioBoughtAssetsInStorage
   );
@@ -46,16 +49,16 @@ export default function PortfolioList() {
         total + currentAsset.priceBought * currentAsset.quantityBought,
       0
     );
-    return (
-      boughtBalance == 0 ? 0 : (((currentBalance - boughtBalance) / boughtBalance) * 100).toFixed(2)
-    );
+    return boughtBalance == 0
+      ? 0
+      : (((currentBalance - boughtBalance) / boughtBalance) * 100).toFixed(2);
   };
   const formatCurrentBalance = (fn) => {
     const totalFixed = new Intl.NumberFormat().format(fn);
     return totalFixed;
   };
   const handleDeleteAsset = async (asset) => {
-    if(storageAssets){
+    if (storageAssets) {
       const newAssets = storageAssets?.filter(
         (coin) => coin.unique_id !== asset.item.unique_id
       );
@@ -80,39 +83,90 @@ export default function PortfolioList() {
         data={assets}
         renderItem={({ item }) => <PortfolioItem item={item} />}
         keyExtractor={({ id }, index) => `${id}${index}`}
-        contentContainerStyle={{ height: '100%' }}
+        contentContainerStyle={{ height: "100%" }}
+        swipeRowStyle={{
+          backgroundColor: PRIMARY_DARK_BLUE_COLOR,
+        }}
+        style={{
+          paddingHorizontal: 8,
+        }}
         ListHeaderComponent={
           <>
-            <View style={styles.balanceContainer}>
-              <View>
+            <View
+              style={{
+                backgroundColor: "rgba(255,255,255,0.02)",
+                padding: 20,
+                borderRadius: 14,
+              }}
+            >
+              <View
+                style={[
+                  styles.flexRow,
+                  {
+                    justifyContent: "space-between",
+                  },
+                ]}
+              >
+                <View
+                  style={[
+                    styles.flexRow,
+                    {
+                      gap: 18,
+                    },
+                  ]}
+                >
+                  <Image
+                    source={require("../../../assets/images/profile.jpg")}
+                    style={styles.profileImage}
+                  />
+                  <View style={{ gap: 3 }}>
+                    <Text style={styles.detailText}>
+                      {user?.email?.split("@")?.[0]}
+                    </Text>
+                    <Text
+                      style={[
+                        styles.detailText,
+                        {
+                          fontSize: 12,
+                          fontWeight: "400",
+                        },
+                      ]}
+                    >
+                      {user?.email}
+                    </Text>
+                  </View>
+                </View>
+                <View
+                  style={{
+                    ...styles.priceChangePercentageContainer,
+                    backgroundColor:
+                      getCurrentValueChange() >= 0 ? "#16c784" : "#ea3943",
+                  }}
+                >
+                  <AntDesign
+                    name={
+                      getCurrentValueChange() >= 0 ? "caretup" : "caretdown"
+                    }
+                    size={8}
+                    color="white"
+                    style={{ alignSelf: "center", marginRight: 5 }}
+                  />
+                  <Text style={styles.percentageChange}>
+                    {getCurrentPercentageChange()} %
+                  </Text>
+                </View>
+              </View>
+              <View style={{ marginTop: 30 }}>
                 <Text style={styles.currentBalance}>Current Balance</Text>
                 <Text style={styles.currentBalanceValue}>
-                  ${formatCurrentBalance(getCurrentBalance().toFixed(2))}
+                  $ {formatCurrentBalance(getCurrentBalance().toFixed(2))}
                 </Text>
                 <Text
                   style={{
-                    ...styles.valueChange,
                     color: getCurrentValueChange() >= 0 ? "#16c784" : "#ea3943",
                   }}
                 >
-                  ${formatCurrentBalance(getCurrentValueChange())} (All Time)
-                </Text>
-              </View>
-              <View
-                style={{
-                  ...styles.priceChangePercentageContainer,
-                  backgroundColor:
-                    getCurrentValueChange() >= 0 ? "#16c784" : "#ea3943",
-                }}
-              >
-                <AntDesign
-                  name={getCurrentValueChange() >= 0 ? "caretup" : "caretdown"}
-                  size={12}
-                  color="white"
-                  style={{ alignSelf: "center", marginRight: 5 }}
-                />
-                <Text style={styles.percentageChange}>
-                  {getCurrentPercentageChange()}%
+                  ${formatCurrentBalance(getCurrentValueChange())} (all time)
                 </Text>
               </View>
             </View>
@@ -124,12 +178,11 @@ export default function PortfolioList() {
         disableRightSwipe
         closeOnRowPress
         ListFooterComponent={
-          <Pressable
-            style={styles.buttonContainer}
+          <CustomButton
+            title="Add New Asset"
             onPress={() => navigation.navigate(paths.ADDNEWASSET)}
-          >
-            <Text style={styles.buttonText}>Add New Asset</Text>
-          </Pressable>
+            style={styles.buttonContainer}
+          />
         }
       />
     </SafeAreaView>
