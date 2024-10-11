@@ -41,6 +41,7 @@ const styles = StyleSheet.create({
     fontSize: 23,
     paddingVertical: 20,
     paddingHorizontal: 10,
+    marginTop: 40
   },
   buttonContainer: {
     backgroundColor: "#4169E1",

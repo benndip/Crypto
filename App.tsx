@@ -6,6 +6,8 @@ import FavouritesProvider from "./src/context/FavouritesProvider";
 import { RecoilRoot } from "recoil";
 import { useFonts, Inter_900Black } from "@expo-google-fonts/inter";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { Provider } from "react-redux";
+import { store } from "src/redux/store";
 
 export default function App() {
   let [fontsLoaded] = useFonts({
@@ -18,29 +20,28 @@ export default function App() {
   }
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
-      <NavigationContainer
-      theme={{
-        colors: {
-          background: "#121212",
-        },
-      }}
-      >
-        <RecoilRoot>
-          <FavouritesProvider>
-            <Navigation />
-            <StatusBar style="light" />
-          </FavouritesProvider>
-        </RecoilRoot>
-      </NavigationContainer>
+      <Provider store={store}>
+        <NavigationContainer
+          theme={{
+            colors: {
+              background: "#121212",
+              primary: "",
+              card: "",
+              text: "",
+              border: "",
+              notification: "",
+            },
+            dark: true,
+          }}
+        >
+          <RecoilRoot>
+            <FavouritesProvider>
+              <Navigation />
+              <StatusBar style="light" />
+            </FavouritesProvider>
+          </RecoilRoot>
+        </NavigationContainer>
+      </Provider>
     </GestureHandlerRootView>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});

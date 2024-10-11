@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { useRoute } from "@react-navigation/native";
 import React, { useEffect, useState } from "react";
 import {
@@ -8,7 +9,7 @@ import {
   SafeAreaView,
   Text,
   TextInput,
-  View,
+  View,s
 } from "react-native";
 import { LineChart, LineChartProvider } from "react-native-wagmi-charts";
 import Filter from "../../components/CoinDetail/Filter";

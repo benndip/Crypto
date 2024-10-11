@@ -1,4 +1,4 @@
-import { View, Text, Pressable } from "react-native";
+import { View, Text, Pressable, SafeAreaView } from "react-native";
 import React from "react";
 import { AntDesign } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
@@ -46,7 +46,7 @@ export default function PortfolioList() {
       0
     );
     return (
-      (((currentBalance - boughtBalance) / boughtBalance) * 100).toFixed(2) || 0
+      boughtBalance == 0 ? 0 : (((currentBalance - boughtBalance) / boughtBalance) * 100).toFixed(2)
     );
   };
   const formatCurrentBalance = (fn) => {
@@ -54,12 +54,14 @@ export default function PortfolioList() {
     return totalFixed;
   };
   const handleDeleteAsset = async (asset) => {
-    const newAssets = storageAssets.filter(
-      (coin) => coin.unique_id !== asset.item.unique_id
-    );
-    const jsonValue = JSON.stringify(newAssets);
-    await AsyncStorage.setItem("@portfolio_coins", jsonValue);
-    setStorageAssets(newAssets);
+    if(storageAssets){
+      const newAssets = storageAssets?.filter(
+        (coin) => coin.unique_id !== asset.item.unique_id
+      );
+      const jsonValue = JSON.stringify(newAssets);
+      await AsyncStorage.setItem("@portfolio_coins", jsonValue);
+      setStorageAssets(newAssets);
+    }
   };
   const renderDeleteButton = (data) => {
     return (
@@ -72,61 +74,63 @@ export default function PortfolioList() {
     );
   };
   return (
-    <SwipeListView
-      data={assets}
-      renderItem={({ item }) => <PortfolioItem item={item} />}
-      //fix warning if repeat same coin and prevent if delete don't delete all same coins.
-      keyExtractor={({ id }, index) => `${id}${index}`}
-      ListHeaderComponent={
-        <>
-          <View style={styles.balanceContainer}>
-            <View>
-              <Text style={styles.currentBalance}>Current Balance</Text>
-              <Text style={styles.currentBalanceValue}>
-                ${formatCurrentBalance(getCurrentBalance().toFixed(2))}
-              </Text>
-              <Text
+    <SafeAreaView>
+      <SwipeListView
+        data={assets}
+        renderItem={({ item }) => <PortfolioItem item={item} />}
+        keyExtractor={({ id }, index) => `${id}${index}`}
+        contentContainerStyle={{ height: '100%' }}
+        ListHeaderComponent={
+          <>
+            <View style={styles.balanceContainer}>
+              <View>
+                <Text style={styles.currentBalance}>Current Balance</Text>
+                <Text style={styles.currentBalanceValue}>
+                  ${formatCurrentBalance(getCurrentBalance().toFixed(2))}
+                </Text>
+                <Text
+                  style={{
+                    ...styles.valueChange,
+                    color: getCurrentValueChange() >= 0 ? "#16c784" : "#ea3943",
+                  }}
+                >
+                  ${formatCurrentBalance(getCurrentValueChange())} (All Time)
+                </Text>
+              </View>
+              <View
                 style={{
-                  ...styles.valueChange,
-                  color: getCurrentValueChange() >= 0 ? "#16c784" : "#ea3943",
+                  ...styles.priceChangePercentageContainer,
+                  backgroundColor:
+                    getCurrentValueChange() >= 0 ? "#16c784" : "#ea3943",
                 }}
               >
-                ${formatCurrentBalance(getCurrentValueChange())} (All Time)
-              </Text>
+                <AntDesign
+                  name={getCurrentValueChange() >= 0 ? "caretup" : "caretdown"}
+                  size={12}
+                  color="white"
+                  style={{ alignSelf: "center", marginRight: 5 }}
+                />
+                <Text style={styles.percentageChange}>
+                  {getCurrentPercentageChange()}%
+                </Text>
+              </View>
             </View>
-            <View
-              style={{
-                ...styles.priceChangePercentageContainer,
-                backgroundColor:
-                  getCurrentValueChange() >= 0 ? "#16c784" : "#ea3943",
-              }}
-            >
-              <AntDesign
-                name={getCurrentValueChange() >= 0 ? "caretup" : "caretdown"}
-                size={12}
-                color="white"
-                style={{ alignSelf: "center", marginRight: 5 }}
-              />
-              <Text style={styles.percentageChange}>
-                {getCurrentPercentageChange()}%
-              </Text>
-            </View>
-          </View>
-          <Text style={styles.assetsTitle}>Your Assets</Text>
-        </>
-      }
-      renderHiddenItem={(data) => renderDeleteButton(data)}
-      rightOpenValue={-70}
-      disableRightSwipe
-      closeOnRowPress
-      ListFooterComponent={
-        <Pressable
-          style={styles.buttonContainer}
-          onPress={() => navigation.navigate("AddNewAssetScreen")}
-        >
-          <Text style={styles.buttonText}>Add New Asset</Text>
-        </Pressable>
-      }
-    />
+            <Text style={styles.assetsTitle}>Your Assets</Text>
+          </>
+        }
+        renderHiddenItem={(data) => renderDeleteButton(data)}
+        rightOpenValue={-70}
+        disableRightSwipe
+        closeOnRowPress
+        ListFooterComponent={
+          <Pressable
+            style={styles.buttonContainer}
+            onPress={() => navigation.navigate("AddNewAssetScreen")}
+          >
+            <Text style={styles.buttonText}>Add New Asset</Text>
+          </Pressable>
+        }
+      />
+    </SafeAreaView>
   );
 }

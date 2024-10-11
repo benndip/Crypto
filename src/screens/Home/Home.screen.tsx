@@ -5,7 +5,7 @@ import CoinCard from "./../../components/CoinCard";
 import { getMarketData } from "./../../services/requests";
 
 export default function HomeScreen() {
-  const [coins, setCoins] = useState([]);
+  const [coins, setCoins] = useState<any>([]);
   const [isLoading, setIsLoading] = useState(false);
   const fetchCoins = async (page = 1) => {
     if (isLoading) {
@@ -14,7 +14,7 @@ export default function HomeScreen() {
     setIsLoading(true);
     const coinsData = await getMarketData(page);
     if(coinsData)
-      setCoins((prevCoins) => [...prevCoins, ...coinsData]);
+      setCoins((prevCoins: any) => [...prevCoins, ...coinsData]);
     setIsLoading(false);
   };
   const refetchCoins = async () => {

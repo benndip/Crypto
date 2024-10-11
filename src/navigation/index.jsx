@@ -1,15 +1,19 @@
 import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import CoinDetail from "./../screens/CoinDetail";
-import BottomTabNavigator from "./BottomTabNavigator";
+import BottomTabNavigator from "./stacks/BottomTabNavigator";
 import AddNewAssetScreen from "../screens/AddNewAsset";
+import AuthStackNavigator from "./stacks/AuthStackNavigator";
+import { Splash } from "src/screens";
 const Stack = createNativeStackNavigator();
 
 function Navigation() {
   return (
-    <Stack.Navigator initialRouteName="Root">
+    <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName="Splash">
+      <Stack.Screen name="Splash" component={Splash} />
+      <Stack.Screen name="AuthStackNavigator" component={AuthStackNavigator} />
       <Stack.Screen
-        name="Root"
+        name="BottomTabNavigator"
         component={BottomTabNavigator}
         options={{ headerShown: false }}
       />

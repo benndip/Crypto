@@ -1,9 +1,10 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import Home from "./../screens/Home";
-import Favourites from "./../screens/FavouritesScreen";
+import Home from "../../screens/Home";
+import Favourites from "../../screens/FavouritesScreen";
 import { Entypo, Foundation, FontAwesome } from "@expo/vector-icons";
-import PortfolioScreen from "../screens/Portfolio";
+import PortfolioScreen from "../../screens/Portfolio";
+import { DEVICE_HEIGHT } from "@utils/sizes";
 
 const Tab = createBottomTabNavigator();
 export default function BottomTabNavigator() {
@@ -16,7 +17,7 @@ export default function BottomTabNavigator() {
         tabBarInactiveTintColor: "grey",
         tabBarStyle: {
           backgroundColor: "#181818",
-          paddingBottom: 2,
+          paddingBottom: DEVICE_HEIGHT * 0.025
         },
       }}
     >
