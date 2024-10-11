@@ -241,6 +241,7 @@ export default function CoinDetail({ route, navigation }) {
                   {price_change_percentage_24h?.toFixed(2)} %
                 </Text>
               </View>
+
               <View style={(styles.flexRow, styles.labelValueView)}>
                 <Text style={{ color: PRIMARY_GRAY_COLOR }}>Current Price</Text>
                 <Text style={{ color: "#fff" }}>{current_price?.usd}</Text>

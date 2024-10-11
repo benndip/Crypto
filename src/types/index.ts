@@ -3,6 +3,7 @@ export type CoinType = {
     symbol: string,
     name: string,
     image: string,
+    market_data: any;
     current_price: number,
     market_cap: number,
     market_cap_rank: number,

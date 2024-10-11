@@ -3,6 +3,7 @@ import { Text, View, Image, Pressable } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import styles from "./styles";
 import { useNavigation } from "@react-navigation/native";
+import { paths } from "src/constants/paths";
 
 export default function index({ marketCoin }) {
   const {
@@ -41,7 +42,7 @@ export default function index({ marketCoin }) {
   return (
     <Pressable
       style={styles.cardContainer}
-      onPress={() => navigation.navigate("CoinDetail", { coinId: id })}
+      onPress={() => navigation.navigate(paths.COINDETAIL, { coinId: id })}
     >
       <Image
         source={{

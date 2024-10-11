@@ -1,6 +1,14 @@
 import { StyleSheet } from "react-native";
-import { DEVICE_HEIGHT, DEVICE_WIDTH, statusBarHeight } from "../../utils/sizes";
-import { PRIMARY_DARK_BLUE_COLOR, PRIMARY_GREY_COLOR, PRIMARY_WHITE_COLOR } from "../../utils/colors";
+import {
+  DEVICE_HEIGHT,
+  DEVICE_WIDTH,
+  statusBarHeight,
+} from "../../utils/sizes";
+import {
+  PRIMARY_DARK_BLUE_COLOR,
+  PRIMARY_GREY_COLOR,
+  PRIMARY_WHITE_COLOR,
+} from "../../utils/colors";
 
 const styles = StyleSheet.create({
   container: {
@@ -80,8 +88,8 @@ const styles = StyleSheet.create({
   },
   trendingFlatlist: {
     height: DEVICE_HEIGHT * 0.2,
-    marginTop: 15
+    marginVertical: 15,
   },
 });
 
-export default styles
+export default styles;

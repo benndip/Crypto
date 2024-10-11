@@ -1,14 +1,13 @@
-import { View, Text, Image } from "react-native";
-import React from "react";
-import styles from "./styles";
 import { AntDesign } from "@expo/vector-icons";
+import React from "react";
+import { Image, Text, View } from "react-native";
+import styles from "./styles";
 
 export default function PortfolioItem({ item }) {
   const {
     currentPrice,
     image,
     name,
-    priceBought,
     priceChangePercentage,
     quantityBought,
     ticker,
