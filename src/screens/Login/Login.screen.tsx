@@ -65,9 +65,7 @@ const Login = ({ navigation }: any) => {
         password: password,
       })
       .then((res) => {
-        const user = res.data.user;
-        console.log(user);
-        
+        const user = res.data.user;        
         const error = res.error
         if(error){
           return Alert.alert(error.message, "Please check your email and password and try again");

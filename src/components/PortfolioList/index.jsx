@@ -13,6 +13,7 @@ import {
   allPortfolioAssets,
   allPortfolioBoughtAssetsInStorage,
 } from "./../../atoms/PortfolioAssets";
+import { paths } from "src/constants/paths";
 
 export default function PortfolioList() {
   const navigation = useNavigation();
@@ -125,7 +126,7 @@ export default function PortfolioList() {
         ListFooterComponent={
           <Pressable
             style={styles.buttonContainer}
-            onPress={() => navigation.navigate("AddNewAssetScreen")}
+            onPress={() => navigation.navigate(paths.ADDNEWASSET)}
           >
             <Text style={styles.buttonText}>Add New Asset</Text>
           </Pressable>

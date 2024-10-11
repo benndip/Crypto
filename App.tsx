@@ -8,23 +8,24 @@ import { useFonts, Inter_900Black } from "@expo-google-fonts/inter";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { Provider } from "react-redux";
 import { store } from "src/redux/store";
+import { PRIMARY_DARK_BLUE_COLOR } from "@utils/colors";
 
 export default function App() {
-  let [fontsLoaded] = useFonts({
-    Inter_900Black,
-    DriodSans: require("./assets/fonts/DroidSans.ttf"),
-  });
+  // let [loaded] = useFonts({
+  //   // Inter_900Black,
+  //   DroidSans: require("./assets/fonts/DroidSans.ttf"),
+  // });
 
-  if (!fontsLoaded) {
-    return <ActivityIndicator size={"large"} />;
-  }
+  // if (!loaded) {
+  //   return <ActivityIndicator size={"large"} />;
+  // }
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <Provider store={store}>
         <NavigationContainer
           theme={{
             colors: {
-              background: "#121212",
+              background: PRIMARY_DARK_BLUE_COLOR,
               primary: "",
               card: "",
               text: "",

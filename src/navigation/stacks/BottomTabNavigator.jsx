@@ -1,10 +1,11 @@
-import React from "react";
+import { Entypo, FontAwesome, Foundation } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import Home from "../../screens/Home";
-import Favourites from "../../screens/FavouritesScreen";
-import { Entypo, Foundation, FontAwesome } from "@expo/vector-icons";
-import PortfolioScreen from "../../screens/Portfolio";
 import { DEVICE_HEIGHT } from "@utils/sizes";
+import React from "react";
+import { Platform } from "react-native";
+import { Portfolio, Favourites, Home } from "src/screens";
+import PortfolioStackNavigator from "./PortfolioStackNavigator";
+import { paths } from "src/constants/paths";
 
 const Tab = createBottomTabNavigator();
 export default function BottomTabNavigator() {
@@ -17,7 +18,8 @@ export default function BottomTabNavigator() {
         tabBarInactiveTintColor: "grey",
         tabBarStyle: {
           backgroundColor: "#181818",
-          paddingBottom: DEVICE_HEIGHT * 0.025
+          paddingBottom: Platform.OS === 'ios' ?  DEVICE_HEIGHT * 0.025 : DEVICE_HEIGHT * 0.01,
+          height: Platform.OS === 'ios' ? 'auto' : DEVICE_HEIGHT*0.08
         },
       }}
     >
@@ -26,22 +28,23 @@ export default function BottomTabNavigator() {
         component={Home}
         options={{
           //color viene de las screenOptions
-          tabBarIcon: ({ focused, color }) => (
-            <Entypo name="home" size={focused ? 30 : 25} color={color} />
+          tabBarIcon: ({ focused, color, size }) => (
+            <Entypo name="home" size={focused ? 28 : size} color={color} />
           ),
         }}
       />
       <Tab.Screen
-        name="Portfolio"
-        component={PortfolioScreen}
+        name={paths.PORTFOLIOSTACKNAVIGATOR}
+        component={PortfolioStackNavigator}
         options={{
-          tabBarIcon: ({ focused, color }) => (
+          tabBarIcon: ({ focused, color,size }) => (
             <Foundation
               name="graph-pie"
-              size={focused ? 35 : 30}
+              size={focused ? 35 : size}
               color={color}
             />
           ),
+          title: 'Portfolio'
         }}
       />
       <Tab.Screen
@@ -49,8 +52,8 @@ export default function BottomTabNavigator() {
         component={Favourites}
         options={{
           //color viene de las screenOptions
-          tabBarIcon: ({ focused, color }) => (
-            <FontAwesome name="star" size={focused ? 30 : 25} color={color} />
+          tabBarIcon: ({ focused, color, size }) => (
+            <FontAwesome name="star" size={focused ? 28 : size} color={color} />
           ),
         }}
       />

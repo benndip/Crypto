@@ -15,7 +15,8 @@ export type HomeStackParamList = {
 };
 
 export type PortfolioStackParamList = {
-  Porfolio: undefined;
+  Portfolio: undefined;
+  AddNewAsset: undefined;
 };
 
 export type AccountStackParamList = {

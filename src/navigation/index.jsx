@@ -1,30 +1,35 @@
-import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import CoinDetail from "./../screens/CoinDetail";
-import BottomTabNavigator from "./stacks/BottomTabNavigator";
-import AddNewAssetScreen from "../screens/AddNewAsset";
+import React from "react";
+import { AddNewAsset, Splash, CoinDetail } from "src/screens";
 import AuthStackNavigator from "./stacks/AuthStackNavigator";
-import { Splash } from "src/screens";
+import BottomTabNavigator from "./stacks/BottomTabNavigator";
+import { paths } from "src/constants/paths";
 const Stack = createNativeStackNavigator();
 
 function Navigation() {
   return (
-    <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName="Splash">
-      <Stack.Screen name="Splash" component={Splash} />
-      <Stack.Screen name="AuthStackNavigator" component={AuthStackNavigator} />
+    <Stack.Navigator
+      screenOptions={{ headerShown: false }}
+      initialRouteName={paths.BOTTOMTABNAVIGATOR}
+    >
+      <Stack.Screen name={paths.SPLASH} component={Splash} />
       <Stack.Screen
-        name="BottomTabNavigator"
+        name={paths.AUTHSTACKNAVIGATOR}
+        component={AuthStackNavigator}
+      />
+      <Stack.Screen
+        name={paths.BOTTOMTABNAVIGATOR}
         component={BottomTabNavigator}
         options={{ headerShown: false }}
       />
       <Stack.Screen
-        name="CoinDetail"
+        name={paths.COINDETAIL}
         component={CoinDetail}
         options={{ headerShown: false }}
       />
       <Stack.Screen
-        name="AddNewAssetScreen"
-        component={AddNewAssetScreen}
+        name={paths.ADDNEWASSET}
+        component={AddNewAsset}
         options={{
           title: "Add New Asset",
           headerStyle: {

@@ -7,6 +7,7 @@ import {
   Pressable,
   Keyboard,
   TouchableWithoutFeedback,
+  Platform,
 } from "react-native";
 import SearchableDropwDown from "react-native-searchable-dropdown";
 import styles from "./styles";
@@ -15,6 +16,7 @@ import { allPortfolioBoughtAssetsInStorage } from "./../../atoms/PortfolioAssets
 import { getAllCoins, getDetailedCoinData } from "./../../services/requests";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
+import { DEVICE_HEIGHT } from "@utils/sizes";
 
 export default function AddNewAssetScreen() {
   const [allCoins, setAllCoins] = useState([]);
@@ -76,7 +78,13 @@ export default function AddNewAssetScreen() {
   };
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
-      <View style={{ flex: 1 }}>
+      <View
+        style={{
+          flex: 1,
+          paddingTop: Platform.OS === "ios" ? 0 : DEVICE_HEIGHT * 0.06,
+          paddingHorizontal: 10,
+        }}
+      >
         <SearchableDropwDown
           items={allCoins}
           onItemSelect={(item) => setSelectedCoinId(item.id)}

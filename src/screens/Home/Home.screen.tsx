@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { FlatList, RefreshControl, Text } from "react-native";
+import { FlatList, Platform, RefreshControl, Text } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import CoinCard from "./../../components/CoinCard";
 import { getMarketData } from "./../../services/requests";
@@ -13,8 +13,7 @@ export default function HomeScreen() {
     }
     setIsLoading(true);
     const coinsData = await getMarketData(page);
-    if(coinsData)
-      setCoins((prevCoins: any) => [...prevCoins, ...coinsData]);
+    if (coinsData) setCoins((prevCoins: any) => [...prevCoins, ...coinsData]);
     setIsLoading(false);
   };
   const refetchCoins = async () => {
@@ -44,6 +43,7 @@ export default function HomeScreen() {
             onRefresh={refetchCoins}
           />
         }
+        contentContainerStyle={Platform.OS === "ios" ? {} : { padding: 16 }}
       />
     </SafeAreaView>
   );

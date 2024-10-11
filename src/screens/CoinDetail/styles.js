@@ -1,18 +1,19 @@
-import { StyleSheet } from "react-native";
+import { PRIMARY_BLUE_COLOR, PRIMARY_DARK_BLUE_COLOR, PRIMARY_GRAY_COLOR } from "@utils/colors";
+import { DEVICE_HEIGHT, DEVICE_WIDTH } from "@utils/sizes";
+import { Platform, StyleSheet } from "react-native";
 const styles = StyleSheet.create({
   container: {
     paddingHorizontal: 10,
+    paddingTop: Platform.OS === "ios" ? 0 : DEVICE_HEIGHT * 0.02,
   },
   priceConverterContainer: {
-    borderTopWidth: 1,
-    borderTopColor: "#2b2b2b",
-    marginTop: 10,
+    marginTop: 0,
   },
   priceConverterTitle: {
     marginTop: 10,
     paddingHorizontal: 10,
     color: "white",
-    fontFamily: "DriodSans",
+    // fontFamily: "DroidSans",
     fontSize: 16,
     fontWeight: "600",
   },
@@ -22,19 +23,59 @@ const styles = StyleSheet.create({
     height: 40,
     margin: 12,
     borderBottomWidth: 1,
-    borderBottomColor: "white",
+    borderBottomColor: PRIMARY_GRAY_COLOR,
+    color: '#fff',
     padding: 10,
     fontSize: 16,
-    color: "white",
   },
   filterContainer: {
     flexDirection: "row",
     justifyContent: "space-around",
-    backgroundColor: "#2b2b2b",
     paddingVertical: 5,
     // borderRadius: 5,
     // marginHorizontal: 5,
     marginVertical: 10,
+  },
+  flexRow: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  currencyView: {
+    width: DEVICE_WIDTH * 0.09,
+    height: DEVICE_WIDTH * 0.09,
+    borderRadius: DEVICE_WIDTH * 0.09,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  text: {
+    color: "#fff",
+  },
+  chartView: {
+    // backgroundColor: "#Fff",
+    borderRadius: 10,
+    padding: 7,
+    marginVertical: 8,
+  },
+  intervalButton: {
+    padding: 4,
+    paddingHorizontal: DEVICE_WIDTH * 0.04,
+    borderRadius: 7,
+  },
+  timeIntervals: {
+    marginVertical: 20,
+    justifyContent: "space-between",
+    alignItems: "center",
+    paddingHorizontal: 18,
+  },
+  coinStatusesView: {
+    gap: 10,
+    justifyContent: "space-between",
+    marginTop: 20,
+    marginBottom: 25,
+  },
+  labelValueView: {
+    justifyContent: "space-between",
+    flexDirection: "row",
   },
 });
 export default styles;

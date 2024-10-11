@@ -10,11 +10,11 @@ const Filter = (props) => {
         paddingHorizontal: 10,
         paddingVertical: 5,
         borderRadius: 5,
-        backgroundColor: isSelected(filterDay) ? "#1e1e1e" : "transparent",
+        backgroundColor: isSelected(filterDay) ? "rgba(255,255,255,0.16)" : "transparent",
       }}
       onPress={() => setSelectedRange(filterDay)}
     >
-      <Text style={{ color: isSelected(filterDay) ? "white" : "grey" }}>
+      <Text style={{ color: "white"}}>
         {filterText}
       </Text>
     </Pressable>

@@ -8,6 +8,7 @@ import { setUser } from 'src/redux/reducers/authSlice';
 
 import LottieView from 'lottie-react-native';
 import { StatusBar } from 'expo-status-bar';
+import { paths } from 'src/constants/paths';
 
 
 const Splash = ({ navigation }) => {
@@ -20,9 +21,9 @@ const Splash = ({ navigation }) => {
       let user = await getValueFor('user')
       if(user){
         dispatch(setUser(user)) 
-        navigation.navigate('BottomTabNavigator')
+        navigation.navigate(paths.BOTTOMTABNAVIGATOR)
       }else{
-        navigation.navigate("AuthStackNavigator");
+        navigation.navigate(paths.AUTHSTACKNAVIGATOR);
       }
   };
    

@@ -32,6 +32,7 @@ const Login = ({ navigation }: any) => {
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const [secureTextEntry, setSecureTextEntry] = useState(true);
+    const [confirmSecureTextEntry, setConfirmSetSecureTextEntry] = useState(true);
     const [loading, setLoading] = useState(false);
 
     const [emailErrorText, setEmailErrorText] = useState("");
@@ -71,13 +72,13 @@ const Login = ({ navigation }: any) => {
         password: password,
       }).then((res)=>{
         const user = res.data.user
-        const error = res.error
+        const error = res.error;
         if(error){
           return Alert.alert(error.message)
         }
         dispatch(setUser(user))
         AsyncStorage.setItem('user',JSON.stringify(user))
-        navigation.navigate('BottomTabNavigator')
+        navigation.navigate(paths.BOTTOMTABNAVIGATOR)
       })
       .catch((error)=>{
         return Alert.alert('Something Unexpected Happended!', error.message)
@@ -160,13 +161,13 @@ const Login = ({ navigation }: any) => {
                   color={confirmPassword?.length == 0 ? "#ccc" : PRIMARY_GRAY_COLOR}
                 />
               )}
-              secureTextEntry={secureTextEntry}
+              secureTextEntry={confirmSecureTextEntry}
               rightIcon={() => (
                 <TouchableOpacity
                   style={styles.eyeIcon}
-                  onPress={() => setSecureTextEntry(!secureTextEntry)}
+                  onPress={() => setConfirmSetSecureTextEntry(!confirmSecureTextEntry)}
                 >
-                  {secureTextEntry ? (
+                  {confirmSecureTextEntry ? (
                     <Eye
                       color={confirmPassword?.length == 0 ? "#ccc" : PRIMARY_GRAY_COLOR}
                     />

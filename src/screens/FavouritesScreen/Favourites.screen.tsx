@@ -1,9 +1,10 @@
 // @ts-nocheck
 import React, { useState, useEffect } from "react";
-import { FlatList, RefreshControl, SafeAreaView } from "react-native";
+import { FlatList, Platform, RefreshControl, SafeAreaView } from "react-native";
 import { useFavourites } from "./../../context/FavouritesProvider";
 import CoinCard from "./../../components/CoinCard";
 import { getFavouritesCoins } from "./../../services/requests";
+import { DEVICE_HEIGHT } from "@utils/sizes";
 export default function Favourites() {
   const { favouritesCoinIds } = useFavourites();
   const [coins, setCoins] = useState([]);
@@ -27,7 +28,13 @@ export default function Favourites() {
   }, [favouritesCoinIds]);
 
   return (
-    <SafeAreaView>
+    <SafeAreaView
+      style={{
+        flex: 1,
+        paddingTop: Platform.OS === "ios" ? 0 : DEVICE_HEIGHT * 0.06,
+        paddingHorizontal: 10,
+      }}
+    >
       <FlatList
         data={coins}
         renderItem={({ item }) => <CoinCard marketCoin={item} />}
